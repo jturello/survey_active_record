@@ -71,3 +71,11 @@ post('/questions/:id/answer') do
   @answers = Answer.all()
   erb(:question)
 end
+
+get('/surveys/:id/take') do
+  @survey = Survey.find(params.fetch("id").to_i())
+  @surveys = Survey.all()
+  @questions = Question.all()
+  @answers = Answer.all()
+  erb(:take_survey)
+end

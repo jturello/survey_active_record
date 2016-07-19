@@ -1,0 +1,16 @@
+<ul>
+  <form action="/surveys/<%= @survey.id() %>/take" method="post">
+  <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+  <% @survey.questions().each() do |question| %>
+    <h4><%= question.name() %>
+      <select id='answer_id' name="answer_id" type='text'>
+      <% question.answers().each() do |answer| %>
+        <option value="<%= answer.id()%>" name="<%= answer.name() %>"><%= answer.name() %></option>
+      <% end %>
+      </select>
+    </h4>
+  <% end %>
+  </form>
+</ul>
+
+<a href="/surveys/<%= @survey.id() %>">return to survey page</a>
