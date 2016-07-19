@@ -18,3 +18,11 @@
 <% else %>
   <p>This question has no answers.</p>
 <% end %>
+
+<h1>Delete This Question</h1>
+<form action="/questions/<%= @question.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+  <button type="submit">Delete</button>
+</form>
+
+<a href="/surveys/<%= @question.survey().id() %>">return to survey</a>

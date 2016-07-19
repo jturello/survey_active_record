@@ -85,9 +85,17 @@ post('/surveys/:id/take') do
   @survey = Survey.find(params.fetch("id").to_i())
   survey_id = params.fetch("survey_id").to_i()
   question_id = params.fetch("question_id").to_i()
-  @answer_ids = params.fetch("answer_id").each
+  @answer_ids = params.fetch("answer_id").each()
   @question = Question.find(question_id)
   @questions = Question.all()
   @answers = Answer.all()
   erb(:results)
+end
+
+delete('/questions/:id') do
+  @question = Question.find(params.fetch("id").to_i())
+  @question.delete()
+  @questions = Question.all()
+  @survey = Survey.find(@question.survey())
+  erb(:survey)
 end

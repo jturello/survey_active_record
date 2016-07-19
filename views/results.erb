@@ -1,6 +1,5 @@
-
+<h1>Your Results</h1>
 <% @answer_ids.each() do |id| %>
   <li><%= Answer.find(id).question().name() %>: <%= Answer.find(id).name() %></li>
   <% end %>
-<br>
-<%= @question.name() %>
+<a href="/">go back home</a>
