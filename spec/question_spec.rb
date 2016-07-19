@@ -13,4 +13,12 @@ describe(Question) do
       expect(test_question1.survey()).to(eq(test_survey))
     end
   end
+
+  describe("#answers") do
+    it "shows the answers for that question" do
+      test_question1 = Question.create({:name => "What is your favorite programming language?", :survey_id => 1})
+      test_answer1 = Answer.create({:name => "Ruby", :question_id => test_question1.id()})
+      expect(test_question1.answers()).to(eq([test_answer1]))
+    end
+  end
 end

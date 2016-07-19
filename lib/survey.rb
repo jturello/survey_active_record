@@ -1,3 +1,4 @@
+require('sinatra/activerecord')
 class Survey < ActiveRecord::Base
   has_many(:questions)
   before_save(:capitalize_title)

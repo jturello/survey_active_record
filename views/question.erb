@@ -1,0 +1,20 @@
+<h1>Add answers for <%= @question.name() %></h1>
+
+<h1>Add a new answer</h1>
+<form action="/questions/<%= @question.id() %>/answer" method="post">
+  <input id="question_id" name="question_id" type="hidden" value="<%= @question.id() %>">
+  <label for="answer_name">Answer Name:</label>
+  <input id="answer_name" name="answer_name" type="text">
+  <button type="submit">Add Answer</button>
+</form>
+
+<h1>Answers for this question</h1>
+<% if @question.answers().any?() %>
+  <ul>
+    <% @question.answers().each() do |answer| %>
+      <li><%= answer.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This question has no answers.</p>
+<% end %>

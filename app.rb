@@ -4,6 +4,7 @@ also_reload("lib/**/*.rb")
 require("sinatra/activerecord")
 require("./lib/survey")
 require("./lib/question")
+require("./lib/answer")
 require("pg")
 
 get('/') do
@@ -53,4 +54,20 @@ post("/surveys/:id/question") do
   @surveys = Survey.all()
   @questions = Question.all()
   erb(:survey)
+end
+
+get('/questions/:id') do
+  @question = Question.find(params.fetch("id").to_i())
+  @questions = Question.all()
+  @answers = Answer.all()
+  erb(:question)
+end
+
+post('/questions/:id/answer') do
+  question_id = params.fetch("question_id").to_i()
+  name = params.fetch("answer_name")
+  @question = Question.find(params.fetch("id").to_i())
+  answer = Answer.create({:name => name, :question_id => question_id})
+  @answers = Answer.all()
+  erb(:question)
 end

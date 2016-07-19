@@ -73,3 +73,29 @@ describe('viewing a survey individual page', {:type => :feature}) do
     expect(page).to have_content('What\'s your favorite language?')
   end
 end
+
+describe('navigating to an individual question page', {:type => :feature}) do
+  it("allows user to add answers to a question") do
+    visit('/surveys/new')
+    fill_in('Survey title', :with => "Programming Languages")
+    click_button('Add Survey')
+    click_link('Programming Languages')
+    fill_in('Question Name', :with => "What's your favorite language?")
+    click_button('Add Question')
+    click_link('What\'s your favorite language?')
+    expect(page).to have_content('Add answers')
+  end
+
+  it('adds an answer to the question') do
+    visit('/surveys/new')
+    fill_in('Survey title', :with => "Programming Languages")
+    click_button('Add Survey')
+    click_link('Programming Languages')
+    fill_in('Question Name', :with => "What's your favorite language?")
+    click_button('Add Question')
+    click_link('What\'s your favorite language?')
+    fill_in('Answer Name:', :with => "Ruby")
+    click_button('Add Answer')
+    expect(page).to have_content('Ruby')
+  end
+end
