@@ -44,3 +44,13 @@ delete("/surveys/:id") do
   @surveys = Survey.all()
   erb(:index)
 end
+
+post("/surveys/:id/question") do
+  survey_id = params.fetch("survey_id").to_i()
+  name = params.fetch("question_name")
+  question = Question.create({:name => name, :survey_id => survey_id})
+  @survey = Survey.find(params.fetch("id").to_i())
+  @surveys = Survey.all()
+  @questions = Question.all()
+  erb(:survey)
+end

@@ -62,4 +62,14 @@ describe('viewing a survey individual page', {:type => :feature}) do
     click_button('Delete')
     expect(page).not_to have_content('Programming Languages')
   end
+
+  it('adds a new question for a survey') do
+    visit('/surveys/new')
+    fill_in('Survey title', :with => "Programming Languages")
+    click_button('Add Survey')
+    click_link('Programming Languages')
+    fill_in('Question Name', :with => "What's your favorite language?")
+    click_button('Add Question')
+    expect(page).to have_content('What\'s your favorite language?')
+  end
 end

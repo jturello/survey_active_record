@@ -14,4 +14,23 @@
   <button type="submit">Delete</button>
 </form>
 
+<h1>Add a new question</h1>
+<form action="/surveys/<%= @survey.id() %>/question" method="post">
+  <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+  <label for="question_name">Question Name:</label>
+  <input id="question_name" name="question_name" type="text">
+  <button type="submit">Add Question</button>
+</form>
+
+<h1>Questions in this survey</h1>
+<% if @survey.questions().any?() %>
+  <ul>
+    <% @survey.questions().each() do |question| %>
+      <li><%= question.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This survey has no questions.</p>
+<% end %>
+
 <a href="/">home</a>
