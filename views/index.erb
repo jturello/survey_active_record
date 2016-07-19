@@ -1,0 +1,15 @@
+<h1><%= @page_title %></h1>
+
+<a href="/surveys/new">create a new survey</a>
+
+<% if @surveys.any?() %>
+  <h3>Here are your surveys:</h3>
+  <ul>
+    <% @surveys.each() do |survey| %>
+    <li><a href="/surveys/<%= survey.id() %>"><%= survey.title %></a></li>
+    <% end %>
+  </ul>
+
+<% else %>
+    <p>There are no surveys yet!</p>
+<% end %>

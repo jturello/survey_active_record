@@ -1,6 +1,11 @@
 require('spec_helper')
 
 describe(Question) do
+  it "validates presence of name" do
+    test_question1 = Question.create({:name => "", :survey_id => 1})
+    expect(test_question1.save()).to(eq(false))
+  end
+
   describe("#survey") do
     it "tells which survey the question is in" do
       test_survey = Survey.create({:title => "Favorite Programming Language"})
