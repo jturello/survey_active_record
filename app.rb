@@ -88,6 +88,7 @@ post('/surveys/:id/take') do
   @questions = Question.all()
   @answers = Answer.all()
   query = params.map{|key, value| "#{key}=#{value}"}.join("&")
+  # binding.pry
   erb(:results)
 end
 

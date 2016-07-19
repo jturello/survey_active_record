@@ -1,6 +1,12 @@
 require('spec_helper')
 
 describe(Answer) do
+
+  it('validates the presence of name') do
+    answer = Answer.new({:name => ""})
+    expect(answer.save()).to eq(false)
+  end
+
   describe("#question") do
     it "tells which question the answer belongs to" do
       test_question1 = Question.create({:name => "What is your favorite programming language?", :survey_id => 1})

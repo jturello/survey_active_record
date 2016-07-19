@@ -1,6 +1,12 @@
 require('spec_helper')
 
 describe(Survey) do
+
+  it('validates presence of title on save') do
+    survey = Survey.new({:title => ""})
+    expect(survey.save()).to eq(false)
+  end
+
   describe("#questions") do
     it "tells which questions are in the survey" do
       test_survey = Survey.create({:title => "Favorite Programming Language"})
