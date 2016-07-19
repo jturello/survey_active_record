@@ -24,7 +24,7 @@ post('/surveys/new') do
   title = params.fetch("title")
   survey = Survey.create({:title => title})
   @surveys = Survey.all()
-  erb(:index)
+  redirect('/')
 end
 
 get('/surveys/:id') do
@@ -44,7 +44,7 @@ delete("/surveys/:id") do
   @survey = Survey.find(params.fetch("id").to_i())
   @survey.delete()
   @surveys = Survey.all()
-  erb(:index)
+  redirect('/')
 end
 
 post("/surveys/:id/question") do
@@ -54,7 +54,7 @@ post("/surveys/:id/question") do
   @survey = Survey.find(params.fetch("id").to_i())
   @surveys = Survey.all()
   @questions = Question.all()
-  erb(:survey)
+  redirect("/surveys/#{@survey.id()}")
 end
 
 get('/questions/:id') do
@@ -70,7 +70,7 @@ post('/questions/:id/answer') do
   @question = Question.find(params.fetch("id").to_i())
   answer = Answer.create({:name => name, :question_id => question_id})
   @answers = Answer.all()
-  erb(:question)
+  redirect("/questions/#{@question.id()}")
 end
 
 get('/surveys/:id/take') do
@@ -84,11 +84,10 @@ end
 post('/surveys/:id/take') do
   @survey = Survey.find(params.fetch("id").to_i())
   survey_id = params.fetch("survey_id").to_i()
-  question_id = params.fetch("question_id").to_i()
   @answer_ids = params.fetch("answer_id").each()
-  @question = Question.find(question_id)
   @questions = Question.all()
   @answers = Answer.all()
+  query = params.map{|key, value| "#{key}=#{value}"}.join("&")
   erb(:results)
 end
 
@@ -97,5 +96,5 @@ delete('/questions/:id') do
   @question.delete()
   @questions = Question.all()
   @survey = Survey.find(@question.survey())
-  erb(:survey)
+  redirect("/surveys/#{@survey.id()}")
 end
