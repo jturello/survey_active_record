@@ -1,16 +1,17 @@
 <ul>
   <form action="/surveys/<%= @survey.id() %>/take" method="post">
-  <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
-  <% @survey.questions().each() do |question| %>
-    <br>
-    <label for="question_id"><%= question.name() %>
-      <select id='answer_id' name="answer_id" type='text'>
-        <% question.answers().each() do |answer| %>
-          <option value="<%= answer.id()%>" name="<%= answer.name() %>"><%= answer.name() %></option>
-        <% end %>
-      </select>
-    </label>
-  <% end %>
+    <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+    <% @survey.questions().each() do |question| %>
+      <br>
+      <input id="question_id" name="question_id" type="hidden" value="<%= question.id() %>">
+      <label for="question_id"><%= question.name() %>
+        <select id='answer_id[]' name="answer_id[]" type='text'>
+          <% question.answers().each() do |answer| %>
+            <option value="<%= answer.id()%>" name="<%= answer.name() %>"><%= answer.name() %></option>
+          <% end %>
+        </select>
+      </label>
+    <% end %>
   <br>
   <button type="submit">Submit Survey</button>
   </form>

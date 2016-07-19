@@ -1,0 +1,6 @@
+
+<% @answer_ids.each() do |id| %>
+  <li><%= Answer.find(id).question().name() %>: <%= Answer.find(id).name() %></li>
+  <% end %>
+<br>
+<%= @question.name() %>

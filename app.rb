@@ -6,6 +6,7 @@ require("./lib/survey")
 require("./lib/question")
 require("./lib/answer")
 require("pg")
+require('pry')
 
 get('/') do
   @page_title = "Welcome to the Survey App!"
@@ -78,4 +79,15 @@ get('/surveys/:id/take') do
   @questions = Question.all()
   @answers = Answer.all()
   erb(:take_survey)
+end
+
+post('/surveys/:id/take') do
+  @survey = Survey.find(params.fetch("id").to_i())
+  survey_id = params.fetch("survey_id").to_i()
+  question_id = params.fetch("question_id").to_i()
+  @answer_ids = params.fetch("answer_id").each
+  @question = Question.find(question_id)
+  @questions = Question.all()
+  @answers = Answer.all()
+  erb(:results)
 end
