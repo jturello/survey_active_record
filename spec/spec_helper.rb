@@ -1,10 +1,13 @@
 ENV['RACK_ENV'] = 'test'
 
-require("rspec")
-require("pg")
-require("survey")
-require("question")
-require("answer")
+require("bundler/setup")
+Bundler.require(:default, :test)
+set(:root, Dir.pwd())
+
+require('capybara/rspec')
+Capybara.app = Sinatra::Application
+set(:show_exceptions, false)
+require('./app')
 
 RSpec.configure do |config|
   config.after(:each) do

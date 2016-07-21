@@ -1,12 +1,8 @@
-require("sinatra")
-require("sinatra/reloader")
-also_reload("lib/**/*.rb")
-require("sinatra/activerecord")
-require("./lib/survey")
-require("./lib/question")
-require("./lib/answer")
-require("pg")
-require('pry')
+require("bundler/setup")
+Bundler.require(:default)
+
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+
 
 get('/') do
   @page_title = "Welcome to the Survey App!"
