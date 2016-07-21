@@ -1,8 +1,6 @@
 require("bundler/setup")
-Bundler.require(:default)
-
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
-
+Bundler.require(:default)
 
 get('/') do
   @page_title = "Welcome to the Survey App!"
